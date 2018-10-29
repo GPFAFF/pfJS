@@ -4,9 +4,9 @@
   "description": "pfJS library",
   "main": "index.js",
   "scripts": {
-    "prestart": "node buildScripts/startMessage.js",
+    "prestart": "babel-node buildScripts/startMessage.js",
     "audit": "npm audit",
-    "serve": "node buildScripts/server.js",
+    "serve": "babel-node buildScripts/server.js",
     "start": "npm-run-all --parallel audit serve"
   },
   "author": "GREG PFAFF",

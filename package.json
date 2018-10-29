@@ -4,7 +4,10 @@
   "description": "pfJS library",
   "main": "index.js",
   "scripts": {
-    "test": "jest"
+    "prestart": "node buildScripts/startMessage.js",
+    "audit": "npm audit",
+    "serve": "node buildScripts/server.js",
+    "start": "npm-run-all --parallel audit serve"
   },
   "author": "GREG PFAFF",
   "license": "ISC",
@@ -12,6 +15,7 @@
     "whatwg-fetch": "^2.0.4"
   },
   "devDependencies": {
+    "ajv": "^6.0.0",
     "babel-cli": "^6.26.0",
     "babel-core": "^6.26.3",
     "babel-loader": "^7.1.4",
@@ -35,9 +39,7 @@
     "mocha": "^5.2.0",
     "nock": "^9.3.3",
     "npm-run-all": "^4.1.3",
-    "nsp": "^3.2.1",
     "numeral": "^2.0.6",
-    "open": "0.0.5",
     "rimraf": "^2.6.2",
     "style-loader": "^0.21.0",
     "webpack": "^4.12.0",

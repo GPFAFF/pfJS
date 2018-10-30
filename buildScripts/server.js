@@ -1,17 +1,21 @@
 import express from 'express';
+import webpack from 'webpack';
 import path from 'path';
+import config from '../webpack.config.dev';
 
 const port = 5555;
 const app = express();
+const complier = webpack(config);
+
+app.use(require('webpack-dev-middleware')(complier, {
+  noInfo: true,
+  publicPath: config.output.publicPath
+}));
 
 app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, './src/index.html'));
+  res.sendFile(path.join(__dirname, '../src/index.html'));
 });
 
 app.listen(port, (error) => {
-  if (error) {
-    console.log('Error', error)
-  } else {
-    console.log(`pfJS listening on port ${port}!`)
-  }
+  (error) ? console.log('Error', error) : console.log(`pfJS listening on port ${port}!`)
 });

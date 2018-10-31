@@ -1,7 +1,6 @@
 import express from 'express';
 import webpack from 'webpack';
 import path from 'path';
-/* eslint-disable import/default*/
 import config from '../webpack.config.dev';
 
 const port = 5555;

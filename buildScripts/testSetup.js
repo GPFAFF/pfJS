@@ -4,4 +4,4 @@
 require('babel-register')();
 
 // disable webpack features that jest doesn't understand
-require.extensions['.js.css'] = function() {};
+require.extensions['.scss'] = function() {};

@@ -1,6 +1,7 @@
 import express from 'express';
 import webpack from 'webpack';
 import path from 'path';
+/* eslint-disable import/default*/
 import config from '../webpack.config.dev';
 
 const port = 5555;
@@ -17,5 +18,6 @@ app.get('/', (req, res) => {
 });
 
 app.listen(port, (error) => {
-  (error) ? console.log('Error', error) : console.log(`pfJS listening on port ${port}!`)
+  /* eslint-disable no-console */
+  (error) ? console.log('Error', error) : console.log(`pfJS listening on port ${port}!`);
 });

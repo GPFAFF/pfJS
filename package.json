@@ -7,7 +7,9 @@
     "prestart": "babel-node buildScripts/startMessage.js",
     "audit": "npm audit",
     "serve": "babel-node buildScripts/server.js",
-    "start": "npm-run-all --parallel audit serve"
+    "lint": "esw webpack.config.* src buildScripts --color",
+    "lint:watch": "npm run lint -- --watch",
+    "start": "npm-run-all --parallel audit serve lint:watch"
   },
   "author": "GREG PFAFF",
   "license": "ISC",

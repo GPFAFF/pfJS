@@ -9,9 +9,12 @@
     "serve": "babel-node buildScripts/server.js",
     "lint": "esw webpack.config.* src buildScripts --color",
     "lint:watch": "npm run lint -- --watch",
-    "start": "npm-run-all --parallel audit serve lint:watch test:watch",
+    "start": "npm-run-all --parallel audit serve lint:watch test:watch start-mock-api",
     "test": "mocha --timeout 10000 --reporter progress buildScripts/testSetup.js \"src/**/*.test.js\"",
-    "test:watch": "npm run test -- --watch"
+    "test:watch": "npm run test -- --watch",
+    "generate-mock-data": "babel-node buildScripts/generateMockData",
+    "prestart-mock-api": "npm run generate-mock-data",
+    "start-mock-api": "json-server --watch src/api/db.json --port 3001"
   },
   "author": "GREG PFAFF",
   "license": "ISC",

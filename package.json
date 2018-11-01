@@ -23,6 +23,7 @@
   "author": "GREG PFAFF",
   "license": "ISC",
   "dependencies": {
+    "react": "^16.6.0",
     "whatwg-fetch": "^2.0.4"
   },
   "devDependencies": {

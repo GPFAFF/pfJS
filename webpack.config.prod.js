@@ -1,19 +1,19 @@
 import path from 'path';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
-const devMode = process.env.NODE_ENV !== 'production'
 
 module.exports = {
   devtool: 'source-map',
   mode: 'production',
-  entry: [
-    path.resolve(__dirname, 'src/index')
-  ],
+  entry: {
+    vendor: path.resolve(__dirname, 'src/vendor'),
+    main: path.resolve(__dirname, 'src/index')
+  },
   target: 'web',
   output: {
     path: path.resolve(__dirname, 'dist'),
     publicPath: '/',
-    filename: 'bundle.js'
+    filename: '[name].[hash].js'
   },
   plugins: [
     new MiniCssExtractPlugin({
@@ -25,6 +25,7 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: 'src/index.html',
       inject: true,
+      title: 'Caching',
       minify: {
         removeComments: true,
         collapseWhitespace: true,
@@ -39,18 +40,46 @@ module.exports = {
       }
     })
   ],
-
+  optimization: {
+    splitChunks: {
+      chunks: 'async',
+      minSize: 30000,
+      maxSize: 0,
+      minChunks: 1,
+      maxAsyncRequests: 5,
+      maxInitialRequests: 3,
+      automaticNameDelimiter: '~',
+      name: true,
+      cacheGroups: {
+        vendors: {
+          test: /[\\/]node_modules[\\/]/,
+          priority: -10
+        },
+        default: {
+          minChunks: 2,
+          priority: -20,
+          reuseExistingChunk: true
+        }
+      }
+    }
+  },
   module: {
     rules: [
       {test: /\.js$/, exclude: /node_modules/, loaders: ['babel-loader']},
       {
         test: /\.scss$/,
         use:  [
-          devMode ? 'style-loader' : MiniCssExtractPlugin.loader,
-          'css-loader',
-          'sass-loader'
-        ]
-      }
+          MiniCssExtractPlugin.loader,
+        {
+          loader: "css-loader",
+          options: {
+            modules: true,
+            sourceMap: true,
+            importLoader: 2
+          }
+        },
+        "sass-loader"
+      ]}
     ]
   }
 }

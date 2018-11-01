@@ -1,5 +1,5 @@
 import path from 'path';
-// import MiniCssExtractPlugin from 'mini-css-extract-plugin';
+import HtmlWebpackPlugin from 'html-webpack-plugin';
 
 module.exports = {
   devtool: 'inline-source-map',
@@ -14,9 +14,10 @@ module.exports = {
     filename: 'bundle.js'
   },
   plugins: [
-    // new MiniCssExtractPlugin({
-    //   filename: 'index.css',
-    // }),
+    new HtmlWebpackPlugin({
+      template: 'src/index.html',
+      inject: true
+    })
   ],
   module: {
     rules: [
